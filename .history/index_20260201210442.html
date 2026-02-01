@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice AI Agent</title>
+</head>
+<body>
+    <h2>Upload Meeting Audio</h2>
+
+    <input type="file" name="file" id="audioFile">
+    <button onclick="send()">Upload</button>
+    <pre id="output"></pre>
+
+<script>
+    async function send() {
+        const file = document.getElementById("audioFile").files[0]
+        const form = new FormData()
+        form.append("file",file)
+    }
+    const res = await fetch("http://127.0.0.1:8000/voice-agent",{
+        met
+    })
+</script>
+</body>
+</html>

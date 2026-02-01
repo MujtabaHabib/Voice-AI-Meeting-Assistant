@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Voice AI Agent</title>
+</head>
+<body>
+    <div class="container">
+    <h2>🎤 Voice AI Meeting Assistant</h2>
+
+    <div class="upload-row">
+        <input type="file"  id="audioFile">
+        <button onclick="send()">Upload</button>
+    </div>
+
+    <p id="fileName">No file selected</p>
+
+    <div class="box">
+        <h3>📝 Transcript</h3>
+        <p id="transcript">Waiting for audio...</p>
+    </div>
+
+    <div class="box">
+        <h3>📌 AI Summary</h3>
+        <p id="summary">Waiting for analysis...</p>
+    </div>
+</div>
+<script>
+    async function send() {
+        const fileInput = document.getElementById("audiofile")
+        const file = fileInput.files[0]
+
+        if (!file){
+            alert("Please select an ad file first.")
+        }
+
+        const form = new FormData()
+        form.append("file",file)
+
+        document.getElementById("transcript").innerText = "processing..."
+        document.getElementById("summary").innerText = "AI is thinking.."
+
+    const res = await fetch("http://127.0.0.1:8000/voice-agent",{
+        method : "POST",
+        body : form
+    })
+
+    const data = await res.json()
+
+    document.getElementById("transcript").innerText = data.transcript
+    document.getElementById("summary").innerText = data.summary
+}
+</script>
+</body>
+</html>
