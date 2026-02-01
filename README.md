@@ -48,5 +48,3 @@ This project shows how to:
 - Design real-world GenAI systems
 
 ---
-
-### 1. Clone the repository
